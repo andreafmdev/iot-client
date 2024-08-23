@@ -18,11 +18,16 @@
         </div>
 
         <hr class="my-5 border-gray-200 mx-4" />
-        <div
-          class="px-2 text-xs font-semibold text-gray-400 uppercase tracking-wider"
-        v-if="!isSidebarCollapsed">
+
+         <!-- Menu title -->
+         <div
+          class="px-2 text-xs font-semibold text-gray-400 uppercase tracking-wider menu-title"
+          :class="{ hidden: isSidebarCollapsed }"
+        >
           Menu
         </div>
+        <hr class="my-5 border-gray-200 mx-4" />
+
         <SidebarMenuItem
           v-for="(item, index) in menuItems"
           :key="index"
@@ -31,7 +36,6 @@
           :link="item.link"
         />
         <hr class="my-5 border-gray-200 mx-4" />
-        
       </div>
     </div>
   </div>
@@ -39,23 +43,20 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { useSidebarStore } from '@store/sidebarStore';
+import { sidebarItemsDefaultConfig } from "@config/sidebar/sidebarconfig";
 
-import { useStore } from "vuex";
-import { key } from '@store/store';
-import {sidebarItemsDefaultConfig} from "@config/sidebar/sidebarconfig";
 import SidebarMenuItem from "@components/sidebar/SidebarMenuItem.vue";
 
-console.log(sidebarItemsDefaultConfig)
 // Ensure proper type assertion or ensure sidebarItemsDefaultConfig is typed
 const menuItems = sidebarItemsDefaultConfig;
-const store = useStore(key);
+const sidebarStore = useSidebarStore();
+console.log(sidebarStore);
 
-const isSidebarCollapsed = computed(() => store.state.isSidebarCollapsed);
-
-
+const isSidebarCollapsed = computed(() => sidebarStore.isSidebarCollapsed);
 
 function toggleSidebar() {
-  store.commit("toggleSidebar");
+  sidebarStore.toggleSidebar();
 }
 </script>
 
@@ -65,10 +66,22 @@ function toggleSidebar() {
 }
 
 .expanded {
-  width: 16rem; /* Questa è la larghezza quando la sidebar è espansa */
+  width: 100%; /* Questa è la larghezza quando la sidebar è espansa */
 }
 
 .transition-width {
   transition: width 0.4s ease-in-out; /* Transizione di larghezza */
+}
+.menu-title {
+  height: 100px; /* Default height */
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
+.menu-title.hidden {
+  height: 100px; /* Keeps height intact */
+  opacity: 0;
+  visibility: hidden; /* Makes the text invisible but keeps the space */
 }
 </style>

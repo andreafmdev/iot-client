@@ -26,14 +26,14 @@
 
     "paths": {
       "@/*": ["./src/*"],
+      "@types/*": ["./src/types/*"],
       "@components/*": ["./src/components/*"],
       "@views/*": ["./src/views/*"],
       "@store/*": ["./src/store/*"],
       "@config/*": ["./src/config/*"],
       "@assets/*": ["./src/assets/*"],
-      "@router/*": ["./src/router/*"]
-
-
+      "@router/*": ["./src/router/*"],
+      "@services/*": ["./src/services/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

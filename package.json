@@ -11,13 +11,19 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.22",
     "@heroicons/vue": "^2.1.5",
+    "@sira-ui/tailwind": "^0.11.8",
+    "axios": "^1.7.4",
+    "chart.js": "^4.4.3",
     "direct-vuex": "^1.0.0-rc3",
+    "jwt-decode": "^4.0.0",
+    "pinia": "^2.2.2",
     "tslint": "^5.20.1",
     "vue": "^3.4.35",
-    "vue-router": "^4.4.3",
-    "vuex": "^4.0.2"
+    "vue-chartjs": "^5.3.1",
+    "vue-router": "^4.4.3"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
     "@types/module-alias": "^2.0.4",
     "@types/node": "^22.3.0",
     "@vitejs/plugin-vue": "^5.1.2",

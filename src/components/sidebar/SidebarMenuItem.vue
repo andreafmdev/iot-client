@@ -21,28 +21,50 @@
   </RouterLink>
 </template>
 
-<script setup lang="ts">
-import { computed } from "vue";
-import { useStore } from "vuex";
-import { key } from "@store/store";
+<script lang="ts">
+import { computed, defineComponent } from "vue";
+import { useSidebarStore } from '@store/sidebarStore';
 
 import { RouterLink } from "vue-router";
-// Define props with types
-defineProps<{
-  name: string;
-  icon: string;
-  link: string;
-  isCollapsed?: boolean;
-}>();
 
-// Access Vuex store and state
-const store = useStore(key);
-// Computed property for sidebar collapsed state
-const isSidebarCollapsed = computed(() => store.state.isSidebarCollapsed);
+export default defineComponent({
+  name: "SidebarMenuItem", // Fixed typo in component name
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+    icon: {
+      type: String,
+      required: true,
+    },
+    link: {
+      type: String,
+      required: true,
+    },
+    isCollapsed: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup(props) {
+    // Access Vuex store and state
+    const sidebarStore = useSidebarStore();
+
+    // Computed property for sidebar collapsed state
+    const isSidebarCollapsed = computed(() => sidebarStore.isSidebarCollapsed);
+
+    // Return everything that is needed in the template
+    return {
+      isSidebarCollapsed,
+      ...props, // Spread props to make them available in the template
+    };
+  },
+});
 </script>
 
 <style scoped>
 svg {
-  margin: auto; /* Centra l'icona all'interno del contenitore */
+  margin: auto; /* Center the icon within the container */
 }
 </style>
